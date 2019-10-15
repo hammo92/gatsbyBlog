@@ -7,31 +7,23 @@ const Wrapper = styled.section`
   width: 100%;
   background:#f4f6f9;
   padding:20px 0;
-  & p {
-    width:${props => props.theme.sizes.maxWidth};
-    text-align:center;
-    margin:20px auto 40px auto;
-    font-size:1.6em;
-    font-weight:600;
-    color:#9499a4;
-  }
 `
 
 const List = styled.div`
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin:auto;
   width: ${props => props.theme.sizes.maxWidth};
+  grid-column-gap: 1em;
 
 `
-const BrandList = props => {
+const TestimonialList = props => {
   return (
     <Wrapper>
-    <p>Join the great brands already working with RevolioHub:</p>
     <List>{props.children}</List>
     </Wrapper>
   )
 
 }
 
-export default BrandList
+export default TestimonialList

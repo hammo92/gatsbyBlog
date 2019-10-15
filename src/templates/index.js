@@ -10,6 +10,9 @@ import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import BrandList from '../components/BrandList'
 import Brand from '../components/Brand'
+import TestimonialList from '../components/TestimonialList'
+import Testimonial from '../components/Testimonial'
+import FeatureBlock from '../components/feature'
 
 
 import HomeSlide from '../components/Slick'
@@ -18,6 +21,8 @@ const Index = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
+  const testimonials = data.allContentfulTestimonial.edges
+  const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
@@ -38,8 +43,14 @@ const Index = ({ data, pageContext }) => {
         {brands.slice(0).map(({ node: brand }) => (
           <Brand key={brand.id} {...brand} />
         ))}
-    </BrandList>
+      </BrandList>
+      <TestimonialList>
+        {testimonials.slice(0).map(({ node: testimonial }) => (
+          <Testimonial key={testimonial.id} {...testimonial} />
+        ))}
+      </TestimonialList>
       <Container>
+        <FeatureBlock  {...featureBlockA}/>
 
 
 
@@ -118,6 +129,49 @@ export const query = graphql`
         node{
           brandName
           logo {
+            title
+            fluid(maxWidth: 1800) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+        }
+      }
+
+    }
+    allContentfulTestimonial(
+      limit: $limit
+      skip: $skip
+    ){
+      edges{
+        node{
+          title
+          content
+          name
+          company
+          avatar {
+            title
+            fluid(maxWidth: 1800) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+        }
+      }
+
+    }
+    allContentfulFeatureBlock(
+      limit: $limit
+      skip: $skip
+    ){
+      edges{
+        node{
+          title
+          content{
+            childMarkdownRemark {
+              html
+            }
+          }
+          subTitle
+          featImage {
             title
             fluid(maxWidth: 1800) {
               ...GatsbyContentfulFluid_withWebp_noBase64

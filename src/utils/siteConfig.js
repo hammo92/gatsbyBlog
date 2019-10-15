@@ -1,6 +1,6 @@
 module.exports = {
-  siteTitle: 'GCN',
-  siteTitleAlt: 'GCN Gatsby Starter', // This allows an alternative site title for SEO schema.
+  siteTitle: 'Revolio Hub',
+  siteTitleAlt: 'RevolioHub', // This allows an alternative site title for SEO schema.
   publisher: 'Publisher named GCN', // Organization name used for SEO schema
   siteDescription:
     'A starter template to build amazing static websites with Gatsby, Contentful and Netlify',
@@ -10,8 +10,9 @@ module.exports = {
   author: 'GCN User', // Author for RSS author segment and SEO schema
   authorUrl: 'https://gcn.netlify.com/about/', // URL used for author and publisher schema, can be a social profile or other personal site
   userTwitter: '@twitter', // Change for Twitter Cards
-  shortTitle: 'GCN App', // Used for App manifest e.g. Mobile Home Screen
+  shortTitle: 'RevolioHub', // Used for App manifest e.g. Mobile Home Screen
   shareImage: '/logos/share.jpg', // Open Graph Default Share Image. 1200x1200 is recommended
+  logoImage: '/logos/mainLogo.png', //Site Logo
   shareImageWidth: 900, // Change to the width of your default share image
   shareImageHeight: 600, // Change to the height of your default share image
   siteLogo: '/logos/logo-512.png', // Logo used for SEO, RSS, and App manifest

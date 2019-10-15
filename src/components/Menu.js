@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import config from '../utils/siteConfig'
 
 const Header = styled.header`
   background: ${props => props.theme.colors.base};
@@ -19,12 +20,18 @@ const Nav = styled.nav`
   }
 
   li {
-    display: inline-block;
+    display: flex;
+    align-items:center;
     margin-left: 1em;
     &:first-child {
       position: relative;
       margin: 0;
       flex-basis: 100%;
+    }
+    img {
+      width:200px;
+      -webkit-filter: invert(1);
+      filter: invert(1);
     }
   }
 
@@ -38,6 +45,7 @@ const Nav = styled.nav`
       color: white;
     }
   }
+
 `
 
 const activeLinkStyle = {
@@ -51,7 +59,7 @@ const Menu = () => {
         <ul>
           <li>
             <Link to="/" activeStyle={activeLinkStyle}>
-              Home
+              <img src={config.logoImage} />
             </Link>
           </li>
           <li>
