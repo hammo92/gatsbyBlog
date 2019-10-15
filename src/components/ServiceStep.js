@@ -50,6 +50,15 @@ const NumberContent = styled.div`
   font-size: 15px;
   line-height: 31px;
   background-color: #fff;
+  & :before{
+
+    border-bottom: 1px solid #e5e5e5;
+    top: 50%;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+
 `
 
 const Excerpt = styled.p`
@@ -57,24 +66,19 @@ const Excerpt = styled.p`
   line-height: 1.6;
 `
 
-const FeatureBlock = ({
+const ServiceStep = ({
   title,
-  featImage,
-  content,
-  subTitle
+  description,
+  order,
+  image
 }) => (
   <Wrapper>
     <ContentBlock>
-      <h3>{subTitle}</h3>
-      <h2>{title}</h2>
-      <Excerpt
-        dangerouslySetInnerHTML={{
-          __html: content.childMarkdownRemark.html,
-        }}
-      />
+      <h3>{title}</h3>
+      <p>{description}></p>
     </ContentBlock>
-    <FeatImg fluid={featImage.fluid} backgroundColor={'#eeeeee'} />
+    <FeatImg fluid={image.fluid} backgroundColor={'#eeeeee'} />
   </Wrapper>
 )
 
-export default FeatureBlock
+export default ServiceStep

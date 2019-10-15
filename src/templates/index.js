@@ -12,7 +12,8 @@ import BrandList from '../components/BrandList'
 import Brand from '../components/Brand'
 import TestimonialList from '../components/TestimonialList'
 import Testimonial from '../components/Testimonial'
-import FeatureBlock from '../components/feature'
+import FeatureBlock from '../components/Feature'
+import ServiceStep from '../components/ServiceStep'
 
 
 import HomeSlide from '../components/Slick'
@@ -23,6 +24,7 @@ const Index = ({ data, pageContext }) => {
   const brands = data.allContentfulBrand.edges
   const testimonials = data.allContentfulTestimonial.edges
   const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
+  const serviceSteps = data.allContentfulServiceStep.edges
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
@@ -51,6 +53,11 @@ const Index = ({ data, pageContext }) => {
       </TestimonialList>
       <Container>
         <FeatureBlock  {...featureBlockA}/>
+        {serviceSteps.slice(0).map(({ node: serviceStep }) => (
+          <ServiceStep key={serviceStep.id} {...serviceStep} />
+        ))}
+
+
 
 
 
@@ -172,6 +179,25 @@ export const query = graphql`
           }
           subTitle
           featImage {
+            title
+            fluid(maxWidth: 1800) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+        }
+      }
+
+    }
+    allContentfulServiceStep(
+      limit: $limit
+      skip: $skip
+    ){
+      edges{
+        node{
+          title
+          description
+          order
+          image {
             title
             fluid(maxWidth: 1800) {
               ...GatsbyContentfulFluid_withWebp_noBase64
