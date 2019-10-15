@@ -6,7 +6,9 @@ const Wrapper = styled.section`
   display:flex;
   flex-direction:row;
   align-items: center;
-  margin-bottom:3em;
+  margin:0 auto 3em auto;
+  width: 100%;
+  
 
 `
 const FeatImg = styled(Img)`
@@ -70,12 +72,14 @@ const ServiceStep = ({
   title,
   description,
   order,
-  image
+  image,
+  ...props
 }) => (
   <Wrapper>
     <ContentBlock>
-      <h3>{title}</h3>
-      <p>{description}></p>
+      <h3>Step {order}</h3>
+      <h2>{title}</h2>
+      <p>{description}</p>
     </ContentBlock>
     <FeatImg fluid={image.fluid} backgroundColor={'#eeeeee'} />
   </Wrapper>

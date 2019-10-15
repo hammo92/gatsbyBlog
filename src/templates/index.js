@@ -189,6 +189,7 @@ export const query = graphql`
 
     }
     allContentfulServiceStep(
+      sort: {fields: id}
       limit: $limit
       skip: $skip
     ){
