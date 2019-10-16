@@ -2,22 +2,28 @@ import React from 'react'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   display:flex;
-  flex-direction:row;
+  flex-direction:column;
   align-items: center;
   margin:0 auto 3em auto;
-  width: 100%;
-  
+  width: 95%;
+  background:#ffffff;
+  height:100%;
+  border-radius:5px;
+  overflow:hidden;
+
+
 
 `
 const FeatImg = styled(Img)`
-  width:50vw;
+  width:100%
 
 `
 const ContentBlock = styled.div`
-  width:50vw;
-  padding-right:2em;
+  padding:2em ;
+  padding-top:2em;
+  order:2;
   h2{
     font-size: 3em;
     text-transform: capitalize;

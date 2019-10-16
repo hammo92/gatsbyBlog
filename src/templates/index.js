@@ -14,9 +14,12 @@ import TestimonialList from '../components/TestimonialList'
 import Testimonial from '../components/Testimonial'
 import FeatureBlock from '../components/Feature'
 import ServiceStep from '../components/ServiceStep'
+import CtaBanner from '../components/CtaBanner'
+import Slider from "react-slick"
 
 
 import HomeSlide from '../components/Slick'
+
 
 const Index = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges
@@ -28,6 +31,14 @@ const Index = ({ data, pageContext }) => {
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
+  const settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      centerPadding: '60px',
+    };
 
   return (
     <Layout>
@@ -35,8 +46,7 @@ const Index = ({ data, pageContext }) => {
       {!isFirstPage && (
         <Helmet>
           <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
-          <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-          <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+
         </Helmet>
       )}
 
@@ -53,10 +63,20 @@ const Index = ({ data, pageContext }) => {
       </TestimonialList>
       <Container>
         <FeatureBlock  {...featureBlockA}/>
+      </Container>
+
+      <Container style={{background: '#f4f6f9'}} header="how it works">
+      <Slider {...settings}>
+
+
         {serviceSteps.slice(0).map(({ node: serviceStep }) => (
           <ServiceStep key={serviceStep.id} {...serviceStep} />
         ))}
+      </ Slider>
+      </Container>
+      <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
 
+      <Container>
 
 
 
@@ -189,7 +209,7 @@ export const query = graphql`
 
     }
     allContentfulServiceStep(
-      sort: {fields: id}
+      sort: {fields: order, order: ASC}
       limit: $limit
       skip: $skip
     ){

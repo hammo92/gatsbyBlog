@@ -86,6 +86,7 @@ const GlobalStyle = createGlobalStyle`
     background: white;
     line-height: 1;
     font-size: 100%;
+    color:#101935;
     font-variant-ligatures: none;
     text-rendering: optimizeLegibility;
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
@@ -116,5 +117,23 @@ const GlobalStyle = createGlobalStyle`
       box-shadow: none;
     }
   }
+  .slick-track
+  {
+      display: flex !important;
+  }
+
+  .slick-slide
+  {
+      height: inherit !important;
+  }
+  .slick-slide > div { height: 100%; }
+  .slick-next::before, .slick-prev::before {
+
+    font-size: 30px !important;
+    line-height: 1;
+    opacity: .75;
+    color: #9599A4 !important;
+
+    }
 `
 export default GlobalStyle
