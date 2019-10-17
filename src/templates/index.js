@@ -5,7 +5,6 @@ import CardList from '../components/CardList'
 import Card from '../components/Card'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
-import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import BrandList from '../components/BrandList'
@@ -21,7 +20,7 @@ import Slider from "react-slick"
 import HomeSlide from '../components/Slick'
 
 
-const Index = ({ data, pageContext }) => {
+const Index = ({ data }) => {
   const posts = data.allContentfulPost.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
@@ -29,8 +28,6 @@ const Index = ({ data, pageContext }) => {
   const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
   const serviceSteps = data.allContentfulServiceStep.edges
   const featuredPost = posts[0].node
-  const { currentPage } = pageContext
-  const isFirstPage = currentPage === 1
   const settings = {
       dots: false,
       infinite: false,
@@ -42,13 +39,11 @@ const Index = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO />
-      {!isFirstPage && (
+      <SEO />  
         <Helmet>
-          <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
-
+          <title>{config.siteTitle}</title>
         </Helmet>
-      )}
+
 
       <HomeSlide title={hero.title} image={hero.image} desc={hero.descriptionShort} height={'50vh'} />
       <BrandList>
