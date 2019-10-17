@@ -5,6 +5,7 @@ import CardList from '../components/CardList'
 import Card from '../components/Card'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
+import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import BrandList from '../components/BrandList'
@@ -20,7 +21,7 @@ import Slider from "react-slick"
 import HomeSlide from '../components/Slick'
 
 
-const Index = ({ data }) => {
+const Index = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
@@ -28,6 +29,8 @@ const Index = ({ data }) => {
   const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
   const serviceSteps = data.allContentfulServiceStep.edges
   const featuredPost = posts[0].node
+  const { currentPage } = pageContext
+  const isFirstPage = currentPage === 1
   const settings = {
       dots: false,
       infinite: false,
@@ -39,11 +42,13 @@ const Index = ({ data }) => {
 
   return (
     <Layout>
-      <SEO />  
+      <SEO />
+      {!isFirstPage && (
         <Helmet>
-          <title>{config.siteTitle}</title>
-        </Helmet>
+          <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
 
+        </Helmet>
+      )}
 
       <HomeSlide title={hero.title} image={hero.image} desc={hero.descriptionShort} height={'50vh'} />
       <BrandList>
@@ -71,6 +76,27 @@ const Index = ({ data }) => {
       </Container>
       <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
 
+      <Container>
+
+
+
+
+        {isFirstPage ? (
+          <CardList>
+            <Card {...featuredPost} featured />
+            {posts.slice(1).map(({ node: post }) => (
+              <Card key={post.id} {...post} />
+            ))}
+          </CardList>
+        ) : (
+          <CardList>
+            {posts.map(({ node: post }) => (
+              <Card key={post.id} {...post} />
+            ))}
+          </CardList>
+        )}
+      </Container>
+      <Pagination context={pageContext} />
     </Layout>
   )
 }
