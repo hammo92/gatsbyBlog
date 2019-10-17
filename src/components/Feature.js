@@ -36,7 +36,7 @@ const ContentBlock = styled.div`
   }
 `
 
-const Excerpt = styled.p`
+const Desc = styled.div`
   margin: 0 1rem 1rem 0rem;
   line-height: 1.6;
 `
@@ -51,7 +51,7 @@ const FeatureBlock = ({
     <ContentBlock>
       <h3>{subTitle}</h3>
       <h2>{title}</h2>
-      <Excerpt
+      <Desc
         dangerouslySetInnerHTML={{
           __html: content.childMarkdownRemark.html,
         }}
