@@ -34,13 +34,13 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           limit: postsPerFirstPage,
           skip: 0,
-          numPages: numPages + 1,
+          numPages: numPages,
           currentPage: 1,
         },
       })
 
       // Create additional pagination on home page if needed
-      Array.from({ length: numPages }).forEach((_, i) => {
+      /*Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
           path: `/${i + 2}/`,
           component: path.resolve(`./src/templates/index.js`),
@@ -51,7 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
             currentPage: i + 2,
           },
         })
-      })
+      })*/
 
       // Create each individual post
       posts.forEach((edge, i) => {
