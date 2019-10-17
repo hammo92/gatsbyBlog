@@ -76,27 +76,6 @@ const Index = ({ data, pageContext }) => {
       </Container>
       <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
 
-      <Container>
-
-
-
-
-        {isFirstPage ? (
-          <CardList>
-            <Card {...featuredPost} featured />
-            {posts.slice(1).map(({ node: post }) => (
-              <Card key={post.id} {...post} />
-            ))}
-          </CardList>
-        ) : (
-          <CardList>
-            {posts.map(({ node: post }) => (
-              <Card key={post.id} {...post} />
-            ))}
-          </CardList>
-        )}
-      </Container>
-      <Pagination context={pageContext} />
     </Layout>
   )
 }
