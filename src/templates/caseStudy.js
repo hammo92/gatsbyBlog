@@ -12,6 +12,7 @@ import PostDetails from '../components/PostDetails'
 import SEO from '../components/SEO'
 
   const CaseStudyTemplate = ({ data, pageContext }) => {
+  const{
     title,
     slug,
     heroImage,
@@ -19,9 +20,7 @@ import SEO from '../components/SEO'
     requirements,
     solutions,
     results,
-    images,
     projectDate,
-    tags,
   } = data.contentfulCaseStudy
   const postNode = data.contentfulCaseStudy
 
@@ -33,12 +32,10 @@ import SEO from '../components/SEO'
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
-      <SEO pagePath={slug} postNode={postNode} postSEO />
 
       <Hero title={title} image={heroImage} height={'50vh'} />
 
       <Container>
-        {tags && <TagList tags={tags} />}
         <PostDetails
           date={projectDate}
           timeToRead={'5 min'}
@@ -64,12 +61,7 @@ export const query = graphql`
         }
       }
       projectDate(formatString: "MMMM DD, YYYY")
-      projectDateISO: publishDate(formatString: "YYYY-MM-DD")
-      tags {
-        title
-        id
-        slug
-      }
+      projectDateISO: projectDate(formatString: "YYYY-MM-DD")
       heroImage {
         title
         fluid(maxWidth: 1800) {
