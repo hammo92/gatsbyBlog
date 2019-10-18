@@ -26,6 +26,10 @@ import SEO from '../components/SEO'
 
   const previous = pageContext.prev
   const next = pageContext.next
+  function readTime(a,b,c){
+    return a+b+c
+  }
+
 
   return (
     <Layout>
@@ -38,10 +42,13 @@ import SEO from '../components/SEO'
       <Container>
         <PostDetails
           date={projectDate}
-          timeToRead={'5 min'}
+          timeToRead={readTime(requirements.childMarkdownRemark.timeToRead,solutions.childMarkdownRemark.timeToRead,results.childMarkdownRemark.timeToRead)}
         />
+        <Container header="Requirements" />
         <PageBody body={requirements} />
+        <Container header="Solutions" />
         <PageBody body={solutions} />
+        <Container header="Results" />
         <PageBody body={results} />
       </Container>
       <PostLinks previous={previous} next={next} />
@@ -77,16 +84,19 @@ export const query = graphql`
         childMarkdownRemark {
           html
           excerpt(pruneLength: 320)
+          timeToRead
         }
       }
       solutions {
         childMarkdownRemark {
           html
+          timeToRead
         }
       }
       results {
         childMarkdownRemark {
           html
+          timeToRead
         }
       }
     }

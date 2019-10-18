@@ -2,10 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import CardList from '../components/CardList'
-import Card from '../components/Card'
+import CaseCard from '../components/CaseCard'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
-import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import BrandList from '../components/BrandList'
@@ -21,16 +20,14 @@ import Slider from "react-slick"
 import HomeSlide from '../components/Slick'
 
 
-const Index = ({ data, pageContext }) => {
-  const posts = data.allContentfulPost.edges
+const Index = ({ data }) => {
+  const posts = data.allContentfulCaseStudy.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
   const testimonials = data.allContentfulTestimonial.edges
   const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
   const serviceSteps = data.allContentfulServiceStep.edges
   const featuredPost = posts[0].node
-  const { currentPage } = pageContext
-  const isFirstPage = currentPage === 1
   const settings = {
       dots: false,
       infinite: false,
@@ -43,12 +40,10 @@ const Index = ({ data, pageContext }) => {
   return (
     <Layout>
       <SEO />
-      {!isFirstPage && (
         <Helmet>
-          <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
-
+          <title>{config.siteTitle}</title>
         </Helmet>
-      )}
+
 
       <HomeSlide title={hero.title} image={hero.image} desc={hero.descriptionShort} height={'50vh'} />
       <BrandList>
@@ -75,34 +70,22 @@ const Index = ({ data, pageContext }) => {
       </ Slider>
       </Container>
       <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
+      <Container header="Case Studies">
+        <CardList>
+          {posts.slice(0).map(({ node: post }) => (
+            <CaseCard key={post.id} {...post} />
+          ))}
+        </CardList>
 
-      <Container>
+      </ Container>
 
-
-
-
-        {isFirstPage ? (
-          <CardList>
-            <Card {...featuredPost} featured />
-            {posts.slice(1).map(({ node: post }) => (
-              <Card key={post.id} {...post} />
-            ))}
-          </CardList>
-        ) : (
-          <CardList>
-            {posts.map(({ node: post }) => (
-              <Card key={post.id} {...post} />
-            ))}
-          </CardList>
-        )}
-      </Container>
-      <Pagination context={pageContext} />
     </Layout>
   )
 }
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
+
     allContentfulPost(
       sort: { fields: [publishDate], order: DESC }
       limit: $limit
@@ -121,6 +104,33 @@ export const query = graphql`
             }
           }
           body {
+            childMarkdownRemark {
+              timeToRead
+              html
+              excerpt(pruneLength: 80)
+            }
+          }
+        }
+      }
+    }
+    allContentfulCaseStudy(
+      sort: { fields: [projectDate], order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          title
+          slug
+          customer
+          projectDate(formatString: "MMMM DD, YYYY")
+          heroImage {
+            title
+            fluid(maxWidth: 1800) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+          requirements {
             childMarkdownRemark {
               timeToRead
               html
