@@ -44,11 +44,11 @@ import SEO from '../components/SEO'
           date={projectDate}
           timeToRead={readTime(requirements.childMarkdownRemark.timeToRead,solutions.childMarkdownRemark.timeToRead,results.childMarkdownRemark.timeToRead)}
         />
-        <Container header="Requirements" />
+        <Container header="The Brief" />
         <PageBody body={requirements} />
-        <Container header="Solutions" />
+        <Container header="The Solution" />
         <PageBody body={solutions} />
-        <Container header="Results" />
+        <Container header="The Outcome" />
         <PageBody body={results} />
       </Container>
       <PostLinks previous={previous} next={next} />
