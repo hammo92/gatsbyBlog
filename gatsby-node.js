@@ -87,7 +87,7 @@ exports.createPages = ({ graphql, actions }) => {
       caseStudy.map(({ node }) => {
         createPage({
           path: `${node.slug}/`,
-          component: path.resolve(`./src/templates/casestudy.js`),
+          component: path.resolve(`./src/templates/caseStudy.js`),
           context: {
             slug: node.slug,
           },
