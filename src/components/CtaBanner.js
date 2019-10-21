@@ -1,6 +1,7 @@
 import React from 'react'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
+import { Link } from 'gatsby'
 
 const Wrapper = styled.section`
   margin: 0 auto auto;

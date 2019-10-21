@@ -69,7 +69,7 @@ const Index = ({ data }) => {
         ))}
       </ Slider>
       </Container>
-      <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
+      <CtaBanner text={"Get started today"} buttonText={"Contact us"} slug={"contact"}/>
       <Container header="Case Studies">
         <CardList>
           {posts.slice(0).map(({ node: post }) => (
