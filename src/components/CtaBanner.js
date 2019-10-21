@@ -38,7 +38,9 @@ const CtaBanner = props => {
     <Wrapper>
       <Content>
         <h2>{props.text}</h2>
+        <Link to={`/${props.slug}/`}>
         <Button>{props.buttonText}</Button>
+        </Link>
       </Content>
     </Wrapper>
   )

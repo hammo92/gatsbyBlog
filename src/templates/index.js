@@ -39,7 +39,7 @@ const Index = ({ data }) => {
 
   return (
     <Layout>
-      <SEO />  
+      <SEO />
         <Helmet>
           <title>{config.siteTitle}</title>
         </Helmet>
@@ -69,7 +69,7 @@ const Index = ({ data }) => {
         ))}
       </ Slider>
       </Container>
-      <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
+      <CtaBanner text={"Get started today"} buttonText={"Contact us"} slug="contact"/>
 
     </Layout>
   )
