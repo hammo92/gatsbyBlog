@@ -39,19 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
 
-      // Create additional pagination on home page if needed
-      /*Array.from({ length: numPages }).forEach((_, i) => {
-        createPage({
-          path: `/${i + 2}/`,
-          component: path.resolve(`./src/templates/index.js`),
-          context: {
-            limit: postsPerPage,
-            skip: i * postsPerPage + postsPerFirstPage,
-            numPages: numPages + 1,
-            currentPage: i + 2,
-          },
-        })
-      })*/
+    
 
       // Create each individual post
       posts.forEach((edge, i) => {
@@ -64,6 +52,32 @@ exports.createPages = ({ graphql, actions }) => {
             slug: edge.node.slug,
             prev,
             next,
+          },
+        })
+      })
+      resolve()
+    })
+  })
+
+  const loadCaseStudies = new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allContentfulCaseStudy {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
+      }
+    `).then(result => {
+      const caseStudy = result.data.allContentfulCaseStudy.edges
+      caseStudy.map(({ node }) => {
+        createPage({
+          path: `${node.slug}/`,
+          component: path.resolve(`./src/templates/caseStudy.js`),
+          context: {
+            slug: node.slug,
           },
         })
       })

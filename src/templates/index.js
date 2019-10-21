@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import CardList from '../components/CardList'
-import Card from '../components/Card'
+import CaseCard from '../components/CaseCard'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
 import SEO from '../components/SEO'
@@ -21,7 +21,7 @@ import HomeSlide from '../components/Slick'
 
 
 const Index = ({ data }) => {
-  const posts = data.allContentfulPost.edges
+  const posts = data.allContentfulCaseStudy.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
   const testimonials = data.allContentfulTestimonial.edges
@@ -69,7 +69,15 @@ const Index = ({ data }) => {
         ))}
       </ Slider>
       </Container>
-      <CtaBanner text={"Get started today"} buttonText={"Contact us"} slug="contact"/>
+      <CtaBanner text={"Get started today"} buttonText={"Contact us"} />
+      <Container header="Case Studies">
+        <CardList>
+          {posts.slice(0).map(({ node: post }) => (
+            <CaseCard key={post.id} {...post} />
+          ))}
+        </CardList>
+
+      </ Container>
 
     </Layout>
   )
@@ -77,6 +85,7 @@ const Index = ({ data }) => {
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
+
     allContentfulPost(
       sort: { fields: [publishDate], order: DESC }
       limit: $limit
@@ -95,6 +104,33 @@ export const query = graphql`
             }
           }
           body {
+            childMarkdownRemark {
+              timeToRead
+              html
+              excerpt(pruneLength: 80)
+            }
+          }
+        }
+      }
+    }
+    allContentfulCaseStudy(
+      sort: { fields: [projectDate], order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          title
+          slug
+          customer
+          projectDate(formatString: "MMMM DD, YYYY")
+          heroImage {
+            title
+            fluid(maxWidth: 1800) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+          requirements {
             childMarkdownRemark {
               timeToRead
               html
