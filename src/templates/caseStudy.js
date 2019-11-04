@@ -40,8 +40,14 @@ import SEO from '../components/SEO'
           date={projectDate}
           timeToRead={'5 min'}
         />
+      </Container>
+      <Container header="Requirements">
         <PageBody body={requirements} />
+        </ Container>
+      <Container header="Solutions">
         <PageBody body={solutions} />
+      </ Container>
+      <Container header="Results">
         <PageBody body={results} />
       </Container>
       <PostLinks previous={previous} next={next} />
