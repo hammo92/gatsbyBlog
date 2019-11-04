@@ -39,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
 
-    
+
 
       // Create each individual post
       posts.forEach((edge, i) => {
@@ -76,6 +76,32 @@ exports.createPages = ({ graphql, actions }) => {
         createPage({
           path: `${node.slug}/`,
           component: path.resolve(`./src/templates/caseStudy.js`),
+          context: {
+            slug: node.slug,
+          },
+        })
+      })
+      resolve()
+    })
+  })
+
+  const loadProducts = new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allContentfulProduct {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
+      }
+    `).then(result => {
+      const product = result.data.allContentfulProduct.edges
+      product.map(({ node }) => {
+        createPage({
+          path: `${node.slug}/`,
+          component: path.resolve(`./src/templates/product.js`),
           context: {
             slug: node.slug,
           },

@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import CardList from '../components/CardList'
 import CaseCard from '../components/CaseCard'
+import ProductCard from '../components/ProductCard'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
 import SEO from '../components/SEO'
@@ -22,6 +23,7 @@ import HomeSlide from '../components/Slick'
 
 const Index = ({ data }) => {
   const posts = data.allContentfulCaseStudy.edges
+  const products = data.allContentfulProduct.edges
   const hero = data.allContentfulHero.edges[0].node
   const brands = data.allContentfulBrand.edges
   const testimonials = data.allContentfulTestimonial.edges
@@ -70,6 +72,14 @@ const Index = ({ data }) => {
       </ Slider>
       </Container>
       <CtaBanner text={"Get started today"} buttonText={"Contact us"} slug={"contact"}/>
+      <Container header="Popular Products">
+        <CardList>
+          {products.slice(0).map(({ node: product }) => (
+            <ProductCard key={product.id} {...product} />
+          ))}
+        </CardList>
+
+      </ Container>
       <Container header="Case Studies">
         <CardList>
           {posts.slice(0).map(({ node: post }) => (
@@ -136,6 +146,39 @@ export const query = graphql`
               html
               excerpt(pruneLength: 80)
             }
+          }
+        }
+      }
+    }
+    allContentfulProduct(
+      limit: 3
+      skip: $skip
+    ) {
+      edges {
+        node {
+          slug
+          productName
+          description {
+            childMarkdownRemark {
+              html
+              excerpt(pruneLength: 320)
+            }
+          }
+
+          productImages {
+            fluid(maxWidth: 1800) {
+               ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+          departments {
+            departmentName
+            slug
+            departmentDescription {
+              childMarkdownRemark {
+                excerpt(pruneLength: 320)
+              }
+            }
+
           }
         }
       }
