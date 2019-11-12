@@ -99,33 +99,6 @@ const Index = ({ data }) => {
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
 
-    allContentfulPost(
-      sort: { fields: [publishDate], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          title
-          id
-          slug
-          publishDate(formatString: "MMMM DD, YYYY")
-          heroImage {
-            title
-            fluid(maxWidth: 1800) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
-          }
-          body {
-            childMarkdownRemark {
-              timeToRead
-              html
-              excerpt(pruneLength: 80)
-            }
-          }
-        }
-      }
-    }
     allContentfulCaseStudy(
       sort: { fields: [projectDate], order: DESC }
       limit: $limit
@@ -173,16 +146,7 @@ export const query = graphql`
                ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }
-          departments {
-            departmentName
-            slug
-            departmentDescription {
-              childMarkdownRemark {
-                excerpt(pruneLength: 320)
-              }
-            }
-
-          }
+          
         }
       }
     }

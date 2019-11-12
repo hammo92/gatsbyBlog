@@ -51,16 +51,7 @@ export const query = graphql`
            ...GatsbyContentfulFluid_withWebp_noBase64
         }
       }
-      departments {
-        departmentName
-        slug
-        departmentDescription {
-          childMarkdownRemark {
-            excerpt(pruneLength: 320)
-          }
-        }
-
-      }
+    
     }
   }
 `
