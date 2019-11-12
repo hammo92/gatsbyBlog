@@ -6,7 +6,6 @@ import Layout from '../components/Layout'
 import Hero from '../components/Hero'
 import Container from '../components/Container'
 import PageBody from '../components/PageBody'
-import TagList from '../components/TagList'
 import PostLinks from '../components/PostLinks'
 import PostDetails from '../components/PostDetails'
 import SEO from '../components/SEO'
@@ -18,7 +17,6 @@ const PostTemplate = ({ data, pageContext }) => {
     heroImage,
     body,
     publishDate,
-    tags,
   } = data.contentfulPost
   const postNode = data.contentfulPost
 
@@ -35,7 +33,6 @@ const PostTemplate = ({ data, pageContext }) => {
       <Hero title={title} image={heroImage} height={'50vh'} />
 
       <Container>
-        {tags && <TagList tags={tags} />}
         <PostDetails
           date={publishDate}
           timeToRead={body.childMarkdownRemark.timeToRead}
@@ -52,18 +49,10 @@ export const query = graphql`
     contentfulPost(slug: { eq: $slug }) {
       title
       slug
-      metaDescription {
-        internal {
-          content
-        }
-      }
+
       publishDate(formatString: "MMMM DD, YYYY")
       publishDateISO: publishDate(formatString: "YYYY-MM-DD")
-      tags {
-        title
-        id
-        slug
-      }
+
       heroImage {
         title
         fluid(maxWidth: 1800) {

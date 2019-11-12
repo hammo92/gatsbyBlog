@@ -12,6 +12,9 @@ const Wrapper = styled.div`
   height:100%;
   border-radius:5px;
   overflow:hidden;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+      margin:0 auto;
+  }
 
 
 
@@ -29,6 +32,9 @@ const ContentBlock = styled.div`
     text-transform: capitalize;
     font-weight: 800;
     margin-bottom:0.5em;
+    @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+      font-size: 2em;
+    }
   }
   p{
     font-size: 1em;
@@ -41,6 +47,10 @@ const ContentBlock = styled.div`
     font-size:2em;
     margin-bottom:0.2em;
     color:#22a27b;
+    @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+      font-size: 1.5em;
+    }
+    
   }
 `
 const NumberBlock = styled.div`

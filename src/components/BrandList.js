@@ -22,6 +22,9 @@ const List = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   margin:auto;
   width: ${props => props.theme.sizes.maxWidth};
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
 `
 const BrandList = props => {

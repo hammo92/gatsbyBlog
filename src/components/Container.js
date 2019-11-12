@@ -8,6 +8,9 @@ const Centered = styled.section`
   margin: 0 auto auto;
   max-width: ${props => props.theme.sizes.maxWidth};
   padding: 3em 1.5em 2em;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    padding: 2em 0em;
+  }
   flex-grow: 1;
 `
 const Header = styled.h2`

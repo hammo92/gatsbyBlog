@@ -13,6 +13,9 @@ const Nav = styled.nav`
   max-width: ${props => props.theme.sizes.maxWidth};
   margin: 0 auto;
   padding: 0 1.5em;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    max-width: 100%;
+  }
 
   ul {
     display: flex;
@@ -32,6 +35,9 @@ const Nav = styled.nav`
       width:200px;
       -webkit-filter: invert(1);
       filter: invert(1);
+      @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+        width:100px;
+      }
     }
   }
 

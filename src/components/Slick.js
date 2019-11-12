@@ -6,6 +6,9 @@ import Slider from "react-slick";
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    min-height:80vh
+  }
 `
 const BgImg = styled(Img)`
   position: absolute;
@@ -14,6 +17,9 @@ const BgImg = styled(Img)`
   width: 100%;
   z-index: -1;
   min-height: 300px;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    min-height:80vh
+  }
   height: auto;
   @media (min-width: ${props => props.theme.responsive.small}) {
     height: ${props => props.height || 'auto'};
@@ -53,6 +59,11 @@ const Content = styled.div`
   justify-content: center;
   color:#ffffff;
   margin-left:10vw;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    width:100%;
+    margin-left:0;
+    padding:10px
+  }
 `
 
 const Title = styled.h1`

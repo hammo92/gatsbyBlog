@@ -16,6 +16,7 @@ import FeatureBlock from '../components/Feature'
 import ServiceStep from '../components/ServiceStep'
 import CtaBanner from '../components/CtaBanner'
 import Slider from "react-slick"
+import { useMediaQuery } from 'react-responsive'
 
 
 import HomeSlide from '../components/Slick'
@@ -30,12 +31,13 @@ const Index = ({ data }) => {
   const featureBlockA = data.allContentfulFeatureBlock.edges[0].node
   const serviceSteps = data.allContentfulServiceStep.edges
   const featuredPost = posts[0].node
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 50em)' })
   const settings = {
       dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToShow: isTabletOrMobile ? 1: 3,
+      slidesToScroll: isTabletOrMobile ? 1 : 3,
       centerPadding: '60px',
     };
 
@@ -49,12 +51,12 @@ const Index = ({ data }) => {
 
       <HomeSlide title={hero.title} image={hero.image} desc={hero.descriptionShort} height={'50vh'} />
       <BrandList>
-        {brands.slice(0).map(({ node: brand }) => (
+        {brands.slice( 0 ).map(({ node: brand }) => (
           <Brand key={brand.id} {...brand} />
         ))}
       </BrandList>
       <TestimonialList>
-        {testimonials.slice(0).map(({ node: testimonial }) => (
+        {testimonials.slice(isTabletOrMobile ? 2 : 0).map(({ node: testimonial }) => (
           <Testimonial key={testimonial.id} {...testimonial} />
         ))}
       </TestimonialList>
@@ -72,14 +74,7 @@ const Index = ({ data }) => {
       </ Slider>
       </Container>
       <CtaBanner text={"Get started today"} buttonText={"Contact us"} slug={"contact"}/>
-      <Container header="Popular Products">
-        <CardList>
-          {products.slice(0).map(({ node: product }) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </CardList>
 
-      </ Container>
       <Container header="Case Studies">
         <CardList>
           {posts.slice(0).map(({ node: post }) => (
@@ -88,6 +83,14 @@ const Index = ({ data }) => {
         </CardList>
 
       </ Container>
+      <Container header="Popular Products">
+      <CardList>
+        {products.slice(0).map(({ node: product }) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </CardList>
+
+    </ Container>
 
     </Layout>
   )
@@ -151,7 +154,7 @@ export const query = graphql`
       }
     }
     allContentfulProduct(
-      limit: 3
+      limit: 15
       skip: $skip
     ) {
       edges {

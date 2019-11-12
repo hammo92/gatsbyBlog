@@ -7,20 +7,33 @@ const Wrapper = styled.section`
   flex-direction:row;
   align-items: center;
   margin-bottom:3em;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    flex-direction:column;
+  }
 
 `
 const FeatImg = styled(Img)`
   width:50vw;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    width:100%;
+  }
 
 `
 const ContentBlock = styled.div`
   width:50vw;
   padding-right:2em;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    width:100%;
+    padding-right:0em;
+  }
   h2{
     font-size: 3em;
     text-transform: capitalize;
     font-weight: 800;
     margin-bottom:0.5em;
+    @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+      font-size: 2em;
+    }
   }
   p{
     font-size: 1em;
@@ -33,6 +46,9 @@ const ContentBlock = styled.div`
     font-size:2em;
     margin-bottom:0.2em;
     color:#22a27b;
+    @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+      font-size: 1.5em;
+    }
   }
 `
 

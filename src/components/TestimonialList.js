@@ -15,6 +15,9 @@ const List = styled.div`
   margin:auto;
   width: ${props => props.theme.sizes.maxWidth};
   grid-column-gap: 1em;
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    grid-template-columns: 1fr;
+  }
 
 `
 const TestimonialList = props => {
