@@ -127,7 +127,7 @@ export const query = graphql`
       }
     }
     allContentfulProduct(
-      limit: 15
+      limit: 17
       skip: $skip
     ) {
       edges {

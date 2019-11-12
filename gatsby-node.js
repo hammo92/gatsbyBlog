@@ -4,6 +4,38 @@ const path = require(`path`)
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
+  const loadPosts = new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allContentfulProduct {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
+      }
+    `).then(result => {
+      const postsPerFirstPage = config.postsPerHomePage
+      const postsPerPage = config.postsPerPage
+      const numPages = 1
+
+      // Create main home page
+      createPage({
+        path: `/`,
+        component: path.resolve(`./src/templates/index.js`),
+        context: {
+          limit: postsPerFirstPage,
+          skip: 0,
+          numPages: numPages,
+          currentPage: 1,
+        },
+      })
+
+      resolve()
+    })
+  })
+
 
   const loadCaseStudies = new Promise((resolve, reject) => {
     graphql(`
@@ -84,5 +116,5 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.all([ loadPages, loadCaseStudies, loadProducts])
+  return Promise.all([loadPosts, loadProducts, loadPages, loadCaseStudies])
 }
